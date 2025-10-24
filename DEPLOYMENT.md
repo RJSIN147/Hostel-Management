@@ -158,7 +158,7 @@ node server/seeder.js
    - **Dependency Conflicts**: If you get `ERESOLVE` errors, the build script now uses `--legacy-peer-deps` to resolve conflicts
    - **Module Resolution Errors**: If you get `Cannot find module 'ajv/dist/compile/codegen'` errors, the build script now cleans and reinstalls dependencies
    - **React DatePicker Issues**: Updated to version 4.25.0 for React 17 compatibility
-   - **AJV/AJV-Keywords Issues**: Added explicit versions and overrides for these dependencies
+   - **AJV/AJV-Keywords Issues**: Downgraded to React Scripts 4.0.3 for better compatibility
    - Check Node.js version compatibility (>=18.0.0)
    - Ensure all dependencies are in package.json
    - Verify build command is correct
