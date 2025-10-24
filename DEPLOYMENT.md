@@ -159,6 +159,7 @@ node server/seeder.js
    - **Module Resolution Errors**: If you get `Cannot find module 'ajv/dist/compile/codegen'` errors, the build script now cleans and reinstalls dependencies
    - **React DatePicker Issues**: Updated to version 4.25.0 for React 17 compatibility
    - **AJV/AJV-Keywords Issues**: Downgraded to React Scripts 4.0.3 for better compatibility
+   - **OpenSSL Legacy Provider Error**: If you get `error:0308010C:digital envelope routines::unsupported`, this is fixed by adding `NODE_OPTIONS=--openssl-legacy-provider` to the build script
    - Check Node.js version compatibility (>=18.0.0)
    - Ensure all dependencies are in package.json
    - Verify build command is correct
