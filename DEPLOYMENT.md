@@ -82,6 +82,7 @@ npm start
 
 ### 2.3 Environment Variables
 
+**Step 1: Initial Deployment (without REACT_APP_API_URL)**
 Add these environment variables in Render dashboard:
 
 ```
@@ -89,13 +90,19 @@ NODE_ENV=production
 PORT=5000
 MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/hostel-management?retryWrites=true&w=majority
 JWT_SECRET=your-super-secret-jwt-key-here-make-it-long-and-random
-REACT_APP_API_URL=https://your-app-name.onrender.com
 ```
 
+**Step 2: After First Deployment**
+1. Deploy your app first (without REACT_APP_API_URL)
+2. Render will give you a URL like: `https://hostel-management-abc123.onrender.com`
+3. Go back to Environment Variables in Render dashboard
+4. Add: `REACT_APP_API_URL=https://hostel-management-abc123.onrender.com`
+5. Redeploy your app
+
 **Important Notes:**
-- Replace `your-app-name` with your actual Render app name
 - Use a strong, random JWT_SECRET (at least 32 characters)
 - Replace the MongoDB connection string with your actual Atlas URI
+- The REACT_APP_API_URL will be your actual Render URL after first deployment
 
 ### 2.4 Advanced Settings
 
@@ -105,12 +112,23 @@ REACT_APP_API_URL=https://your-app-name.onrender.com
 
 ## Step 3: Post-Deployment Configuration
 
-### 3.1 Update Environment Variables
+### 3.1 Get Your Render URL
 
-After deployment, update the `REACT_APP_API_URL` environment variable with your actual Render URL:
-```
-REACT_APP_API_URL=https://your-actual-app-name.onrender.com
-```
+After your first deployment:
+1. Go to your Render dashboard
+2. Click on your deployed service
+3. You'll see your URL in the format: `https://your-app-name-abc123.onrender.com`
+4. Copy this URL
+
+### 3.2 Update Environment Variables
+
+1. In Render dashboard, go to your service → Environment
+2. Add the new environment variable:
+   ```
+   REACT_APP_API_URL=https://your-actual-app-name-abc123.onrender.com
+   ```
+3. Click "Save Changes"
+4. Your app will automatically redeploy with the correct API URL
 
 ### 3.2 Test Your Application
 
@@ -137,7 +155,9 @@ node server/seeder.js
 ### Common Issues:
 
 1. **Build Failures:**
-   - Check Node.js version compatibility
+   - **Dependency Conflicts**: If you get `ERESOLVE` errors, the build script now uses `--legacy-peer-deps` to resolve conflicts
+   - **React DatePicker Issues**: Updated to version 4.25.0 for React 17 compatibility
+   - Check Node.js version compatibility (>=18.0.0)
    - Ensure all dependencies are in package.json
    - Verify build command is correct
 
@@ -147,9 +167,11 @@ node server/seeder.js
    - Ensure database user has proper permissions
 
 3. **Frontend API Issues:**
-   - Verify REACT_APP_API_URL is set correctly
-   - Check CORS settings in backend
-   - Ensure all API endpoints are working
+   - **Problem**: "Network Error" or API calls failing
+   - **Solution**: Make sure REACT_APP_API_URL is set to your actual Render URL
+   - **Check**: Go to Render dashboard → Environment → Verify REACT_APP_API_URL
+   - **Test**: Open browser dev tools → Network tab → Check if API calls are going to correct URL
+   - **Common mistake**: Using localhost URL instead of Render URL
 
 4. **Authentication Issues:**
    - Verify JWT_SECRET is set
