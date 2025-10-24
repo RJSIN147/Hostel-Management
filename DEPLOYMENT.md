@@ -161,6 +161,7 @@ node server/seeder.js
    - **AJV/AJV-Keywords Issues**: Downgraded to React Scripts 4.0.3 for better compatibility
    - **OpenSSL Legacy Provider Error**: If you get `error:0308010C:digital envelope routines::unsupported`, this is fixed by adding `NODE_OPTIONS=--openssl-legacy-provider` to the build script
    - **Server Dependencies Missing**: If you get `Cannot find package 'express'`, the build script now installs both root and frontend dependencies
+   - **Buffer Equal Constant Time Error**: If you get `Cannot read properties of undefined (reading 'prototype')`, this is fixed by updating to newer dependency versions compatible with Node.js 25
    - Check Node.js version compatibility (>=18.0.0)
    - Ensure all dependencies are in package.json
    - Verify build command is correct
