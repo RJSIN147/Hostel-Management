@@ -13,7 +13,8 @@
     "server": "nodemon server/index.js",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "npm install --prefix frontend --legacy-peer-deps && npm run build --prefix frontend",
+    "prebuild": "npx rimraf frontend/node_modules frontend/package-lock.json",
+    "build": "npm install --prefix frontend --legacy-peer-deps --force && npm run build --prefix frontend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "rimraf": "^5.0.0"
   }
 }
